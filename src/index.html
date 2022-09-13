@@ -10,8 +10,14 @@
   <title>Deck Of Cards</title>
 </head>
 <body class="grid gap-4 mx-auto justify-center min-w-[50%]">
-  <div id="mount" class="flex gap-2">
+  <div id="mount" class="grid gap-6" >
+      <p id="deck"></p>
+      <div class="flex gap-2" id="bot"></div>
+      <div class="flex gap-2" id="player"></div>
   </div>
-  <button class="w-1/2 py-4 m-auto bg-green-800 text-gray-100 rounded" id="btn_getCard">Get deck</button>
+  <div class="flex gap-4">
+    <button class="w-1/2 py-4 m-auto bg-green-800 text-gray-100 rounded" id="btn_newDeck">New deck</button>
+    <button class="w-1/2 py-4 m-auto bg-green-800 text-gray-100 rounded" id="btn_getCards">Get cards</button>
+  </div>
 </body>
 </html>

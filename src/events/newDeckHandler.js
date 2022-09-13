@@ -1,10 +1,10 @@
-import Card from "../components/Card.js";
 import { view, BASE_URL} from "../../utils/constants.js";
 
-export default async function newCard(){
+export default async function newDeckHandler(){
   const deck = await getDeck();
-  const cards = (await getCards(deck)).cards;
-  view.innerHTML = cards.map(card => Card(card)).join('');
+  const p = view.querySelector('#deck');
+  p.textContent = 'Deck id: ' + deck.deck_id;
+  p.dataset.idd = deck.deck_id
 }
 
 async function getDeck(){
@@ -12,9 +12,3 @@ async function getDeck(){
   return await response.json();
 }
 
-async function getCards({deck_id}){
-  const QUANTITY = 6;
-  const response = await fetch(`${BASE_URL}/deck/${deck_id}/draw/?count=${QUANTITY}`)
-  const data = await response.json();
-  return data;
-}
