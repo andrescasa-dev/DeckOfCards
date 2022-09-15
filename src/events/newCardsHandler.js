@@ -1,9 +1,9 @@
 
-import { BASE_URL, view } from "../../utils/constants.js";
+import { d_bot, d_player, p_remaining, p_winner } from "./view.js";
+import { BASE_URL} from "../../utils/constants.js";
 import { cardWinner, getScore } from "../../utils/functions.js";
 import Card from "../components/Card.js";
 import store from "../store.js";
-import { p_remaining, p_winner } from "./view.js";
 
 export default async function newCardsHandler(){ 
   const {cards, remaining} = (await getCards(store.state.deckId))
@@ -21,9 +21,9 @@ async function getCards(deck_id){
   return data;
 }
 
-function displayCards(actor, card){
+function displayCards(actor, card, elm){
   store.dispatch({type:`INCREASE_${actor.toUpperCase()}_SCORE`, payload:{score: getScore(card)}})
-  view.querySelector(`#${actor}`).innerHTML = Card({
+  elm.innerHTML = Card({
     ...card,
     name: actor,
     score: store.state[`${actor}Score`]
@@ -31,8 +31,8 @@ function displayCards(actor, card){
 }
 
 function rendering({botCard, playerCard, remaining}){
-  displayCards('bot', botCard)
-  displayCards('player', playerCard)
+  displayCards('bot', botCard, d_bot)
+  displayCards('player', playerCard, d_player)
   
   p_winner.textContent = cardWinner(playerCard, botCard)
   p_remaining.textContent = remaining
