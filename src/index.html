@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Deck Of Cards</title>
 </head>
-<body class="flex flex-col bg-green-700 gap-2 mx-auto items-center min-w-[50%]">
+<body class="flex flex-col bg-green-700 gap-2 mx-auto items-center min-w-[50%]">  
   <div class="flex gap-6">
     <p id="deck"></p>
     <p>remaining cards: <span id="remaining"></span></p>
@@ -22,8 +22,8 @@
   </div>
   <h2 id="winner"></h2>
   <div class="flex w-1/6 gap-4">
-    <button class="w-1/2 py-4 justify-self-stretch m-auto bg-green-800 text-gray-100 rounded" id="btn_newDeck">New deck</button>
-    <button class="w-1/2 py-4 justify-self-stretch m-auto bg-green-800 text-gray-100 rounded" id="btn_getCards">Get cards</button>
+    <button id="btn_newDeck" class="w-1/2 py-4 justify-self-stretch m-auto bg-green-900 text-gray-100 rounded">New deck</button>
+    <button id="btn_newCards" class=" disabled:opacity-75 w-1/2 py-4 justify-self-stretch m-auto bg-green-900 text-gray-100 rounded" >Get cards</button>
   </div>
 </body>
 </html>

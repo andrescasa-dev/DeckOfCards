@@ -1,15 +1,14 @@
 
-import { d_bot, d_player, p_remaining, p_winner } from "./view.js";
+import { btn_newCards, d_bot, d_player, p_remaining, p_winner } from "./view.js";
 import { BASE_URL} from "../../utils/constants.js";
-import { cardWinner, getScore } from "../../utils/functions.js";
+import { whoWins, getScore } from "../../utils/functions.js";
 import Card from "../components/Card.js";
 import store from "../store.js";
 
-export default async function newCardsHandler(){ 
-  const {cards, remaining} = (await getCards(store.state.deckId))
-  const playerCard = cards[0]
-  const botCard = cards[1]
-
+export default async function newCardsHandler(event){ 
+  const {cards, remaining} = await getCards(store.state.deckId)
+  const [playerCard, botCard] = cards
+  
   rendering({playerCard, botCard, remaining});
 }
 
@@ -22,7 +21,8 @@ async function getCards(deck_id){
 }
 
 function displayCards(actor, card, elm){
-  store.dispatch({type:`INCREASE_${actor.toUpperCase()}_SCORE`, payload:{score: getScore(card)}})
+  const newScore = store.state[`${actor}Score`] + getScore(card);
+  store.dispatch({type:`UPDATE_${actor.toUpperCase()}_SCORE`, payload:{score: newScore}})
   elm.innerHTML = Card({
     ...card,
     name: actor,
@@ -34,7 +34,11 @@ function rendering({botCard, playerCard, remaining}){
   displayCards('bot', botCard, d_bot)
   displayCards('player', playerCard, d_player)
   
-  p_winner.textContent = cardWinner(playerCard, botCard)
   p_remaining.textContent = remaining
   store.dispatch({type: 'UPDATE_REMAINING', payload:{remaining}})
+
+  if(remaining === 0){
+    btn_newCards.disabled = true;
+    p_winner.textContent = whoWins(store.state.playerScore, store.state.botScore)
+  } 
 }

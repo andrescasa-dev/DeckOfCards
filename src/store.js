@@ -27,11 +27,11 @@ function cardsReducer(state = initialState, action){
     case 'UPDATE_REMAINING':
       return {...state, remaining: action.payload.remaining}
 
-    case 'INCREASE_PLAYER_SCORE':
-      return {...state, playerScore: state.playerScore + action.payload.score}
+    case 'UPDATE_PLAYER_SCORE':
+      return {...state, playerScore: action.payload.score}
 
-    case 'INCREASE_BOT_SCORE':
-      return {...state, botScore: state.botScore + action.payload.score}
+    case 'UPDATE_BOT_SCORE':
+      return {...state, botScore: action.payload.score}
 
     case 'UPDATE_DECK_ID':
       return {...state, deckId: action.payload.deckId}

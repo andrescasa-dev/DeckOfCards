@@ -1,6 +1,4 @@
-export function cardWinner(playerCard, botCard){
-  const playerScore = getScore(playerCard)
-  const botScore = getScore(botCard)
+export function whoWins(playerScore, botScore){
   if(playerScore === botScore) return 'Tie'
   return playerScore > botScore ? "Player wins" : "bot wins"
 }
